@@ -36,15 +36,14 @@ int grauVertice(const std::vector<std::vector<int>> &matriz, int vertice) {
   return grau;
 }
 
-void imprimirGrafo(const std::vector<std::vector<int>> &matriz) {
-  std::ofstream arquivo("teste.txt", std::ios::app);
+void imprimirGrafo(const std::vector<std::vector<int>> &matriz,
+                   std::string nomeArquivo = "teste.txt") {
+  std::ofstream arquivo(nomeArquivo, std::ios::app);
   for (const auto &linha : matriz) {
     for (int valor : linha) {
-      std::cout << valor << " ";
       arquivo << valor << " ";
     }
     arquivo << std::endl;
-    std::cout << std::endl;
   }
 
   arquivo.close();
@@ -183,6 +182,16 @@ void grafoComplementar(const std::vector<std::vector<int>> &matriz) {
   arquivo.close();
 }
 
+void inverterDirecaoArestas(std::vector<std::vector<int>> &matriz) {
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < N; j++) {
+      matriz[i][j] = !matriz[i][j];
+    }
+  }
+
+  imprimirGrafo(matriz, "grafo_invertido.txt");
+}
+
 int main() {
   std::vector<std::vector<int>> matriz = lerGrafo("dadosmatriz.txt");
   maiorGrau(matriz);         // QUESTÃO 1
@@ -200,6 +209,8 @@ int main() {
   grauEmissaoRecepcao(matriz); // QUESTÃO 6
 
   grafoComplementar(matriz); // QUESTÃO 7
+
+  inverterDirecaoArestas(matriz); // QUESTÃO 8
 
   return 0;
 }
