@@ -38,7 +38,7 @@ int grauVertice(const std::vector<std::vector<int>> &matriz, int vertice) {
 
 void imprimirGrafo(const std::vector<std::vector<int>> &matriz,
                    std::string nomeArquivo = "teste.txt") {
-  std::ofstream arquivo(nomeArquivo, std::ios::app);
+  std::ofstream arquivo(nomeArquivo);
   for (const auto &linha : matriz) {
     for (int valor : linha) {
       arquivo << valor << " ";
