@@ -192,6 +192,27 @@ void inverterDirecaoArestas(std::vector<std::vector<int>> &matriz) {
   imprimirGrafo(matriz, "grafo_invertido.txt");
 }
 
+bool ehMultiploDe5(int numero) {
+    return (numero % 5 == 0);
+}
+
+void verticeMultiplo5(std::vector<std::vector<int>> &matriz){
+  std::ofstream arquivo("dados_grafo_gerador.txt");
+for (int i = 0; i < N; i++) {
+    for (int j = 0; j < N; j++) {
+        if (ehMultiploDe5(matriz[i][j]))
+        {
+          arquivo<<"vertice "<< i << " x "<< j << ": " << matriz[i][j] <<std::endl;
+        } 
+      }
+    }
+    arquivo.close();
+}
+
+bool estaoConectados(std::vector<std::vector<int>> &matriz) {
+    return matriz[0][matriz.size() - 1] == 1;
+}
+
 int main() {
   std::vector<std::vector<int>> matriz = lerGrafo("dadosmatriz.txt");
   maiorGrau(matriz);         // QUESTÃO 1
@@ -208,9 +229,16 @@ int main() {
 
   grauEmissaoRecepcao(matriz); // QUESTÃO 6
 
-  grafoComplementar(matriz); // QUESTÃO 7
+  grafoComplementar(matriz); // QUESTÃO 7 e 9
 
   inverterDirecaoArestas(matriz); // QUESTÃO 8
+  
+  verticeMultiplo5(matriz); // QUESTÃO 10
 
+  if (estaoConectados(matriz)) {
+        std::cout << "O primeiro e o último vértice estão conectados." << std::endl;
+    } else {
+        std::cout << "O primeiro e o último vértice não estão conectados." << std::endl;
+    } // QUESTÃO 12
   return 0;
 }

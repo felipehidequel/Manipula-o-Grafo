@@ -1,11 +1,9 @@
 all: app
 
-app: terceira_unidade.cpp
-	g++ -o app terceira_unidade.cpp -Wall -g
+app: zero.cpp
+	g++ -o zero zero.cpp -std=gnu++17 -Wall -g
 
 clean:
 	rm -f app *.o
 
-debug: terceira_unidade.cpp
-	g++ -o app terceira_unidade.cpp -Wall -g -DDEBUG
 
