@@ -213,6 +213,42 @@ bool estaoConectados(std::vector<std::vector<int>> &matriz) {
     return matriz[0][matriz.size() - 1] == 1;
 }
 
+bool isClique(std::vector<std::vector<int>> &matriz, std::vector<int> vertices)
+{
+  for (int i = 0; i < vertices.size(); i++)
+  {
+    for (int j = i + 1; j < vertices.size(); j++)
+    {
+      if (matriz[vertices[i]][vertices[j]] == 0)
+      {
+      }
+    }
+  }
+  return true;
+}
+
+int maxClique(std::vector<std::vector<int>> &matriz)
+{
+  int max = 0;
+  for (int i = 0; i < N; i++)
+  {
+    std::vector<int> vertices;
+    vertices.push_back(i);
+    for (int j = i + 1; j < N; j++)
+    {
+      if (matriz[i][j] > 0)
+      {
+        vertices.push_back(j);
+      }
+    }
+    if (isClique(matriz, vertices) && vertices.size() > max)
+    {
+      max = vertices.size();
+    }
+  }
+  return max;
+}
+
 int main() {
   std::vector<std::vector<int>> matriz = lerGrafo("dadosmatriz.txt");
   maiorGrau(matriz);         // QUESTÃO 1
@@ -234,6 +270,8 @@ int main() {
   inverterDirecaoArestas(matriz); // QUESTÃO 8
   
   verticeMultiplo5(matriz); // QUESTÃO 10
+
+  std::cout << "O número máximo de cliques: " << maxClique(matriz) << std::endl; // QUESTÃO 11
 
   if (estaoConectados(matriz)) {
         std::cout << "O primeiro e o último vértice estão conectados." << std::endl;
