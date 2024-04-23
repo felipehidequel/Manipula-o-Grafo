@@ -221,6 +221,7 @@ bool isClique(std::vector<std::vector<int>> &matriz, std::vector<int> vertices)
     {
       if (matriz[vertices[i]][vertices[j]] == 0)
       {
+        return false;
       }
     }
   }
